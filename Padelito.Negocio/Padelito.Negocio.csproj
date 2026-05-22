@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B956395-A7ED-4C6E-ABB5-81DC24CD52E2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Padelito.Negocio</RootNamespace>
+    <AssemblyName>Padelito.Negocio</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Padelito.Datos\Padelito.Datos.csproj">
+      <Project>{09E5EB87-621E-440F-8078-C92DE0399DB0}</Project>
+      <Name>Padelito.Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Padelito.Dominio\Padelito.Dominio.csproj">
+      <Project>{E75DF245-99A2-4DDA-969F-E9BFF2B4AAD2}</Project>
+      <Name>Padelito.Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Servicios\ClienteNegocio.cs" />
+    <Compile Include="Servicios\EmpleadoNegocio.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
