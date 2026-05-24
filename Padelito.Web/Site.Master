@@ -7,24 +7,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Padelito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/dashboard.css" rel="stylesheet" />
 </head>
-<body class="bg-light">
+<body>
     <form id="form1" runat="server">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-            <div class="container">
-                <a class="navbar-brand fw-semibold" href="Default.aspx">Padelito</a>
-                <div class="navbar-nav">
-                    <a class="nav-link" href="Clientes.aspx">Clientes</a>
-                    <a class="nav-link" href="Empleados.aspx">Empleados</a>
-                    <a class="nav-link" href="TiposCancha.aspx">Tipos cancha</a>
-                    <a class="nav-link" href="Canchas.aspx">Canchas</a>
-                </div>
-            </div>
-        </nav>
+        <div class="dashboard-shell">
+            <aside class="dashboard-sidebar">
+                <a class="sidebar-brand" href="Default.aspx">
+                    <span class="brand-mark">P</span>
+                    <span>
+                        <strong>Padelito</strong>
+                        <small>Gestion de canchas</small>
+                    </span>
+                </a>
 
-        <main class="container py-4">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-        </main>
+                <nav class="sidebar-menu" aria-label="Menu principal">
+                    <a class="sidebar-link" href="Default.aspx">
+                        <span class="link-icon">IN</span>
+                        Inicio
+                    </a>
+                    <a class="sidebar-link" href="Clientes.aspx">
+                        <span class="link-icon">CL</span>
+                        Clientes
+                    </a>
+                    <a class="sidebar-link" href="Empleados.aspx">
+                        <span class="link-icon">EM</span>
+                        Empleados
+                    </a>
+                    <a class="sidebar-link" href="TiposCancha.aspx">
+                        <span class="link-icon">TC</span>
+                        Tipos de cancha
+                    </a>
+                    <a class="sidebar-link" href="Canchas.aspx">
+                        <span class="link-icon">CA</span>
+                        Canchas
+                    </a>
+                    <a class="sidebar-link" href="TurnosDisponibles.aspx">
+                        <span class="link-icon">TD</span>
+                        Turnos disponibles
+                    </a>
+                    <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
+                        <span class="link-icon">RE</span>
+                        Reservas
+                        <span class="badge text-bg-secondary ms-auto">Pendiente</span>
+                    </a>
+                    <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
+                        <span class="link-icon">PG</span>
+                        Pagos
+                        <span class="badge text-bg-secondary ms-auto">Pendiente</span>
+                    </a>
+                    <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
+                        <span class="link-icon">RP</span>
+                        Reportes
+                        <span class="badge text-bg-secondary ms-auto">Pendiente</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <div class="dashboard-content">
+                <header class="topbar">
+                    <div>
+                        <span class="section-kicker">Panel administrativo</span>
+                        <h1 class="section-title"><%= Page.Title %></h1>
+                    </div>
+
+                    <div class="topbar-actions">
+                        <div class="search-box">
+                            <span class="search-icon">Buscar</span>
+                            <input class="form-control" type="search" placeholder="Cliente, cancha o reserva" aria-label="Buscar" />
+                        </div>
+
+                        <div class="user-chip">
+                            <span class="user-avatar">AD</span>
+                            <span>
+                                <strong>Admin</strong>
+                                <small>Turno gestion</small>
+                            </span>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="dashboard-main">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                </main>
+            </div>
+        </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -41,6 +41,7 @@
     <Compile Include="Servicios\ClienteNegocio.cs" />
     <Compile Include="Servicios\EmpleadoNegocio.cs" />
     <Compile Include="Servicios\TiposCanchaNegocio.cs" />
+    <Compile Include="Servicios\TurnosDisponiblesNegocio.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

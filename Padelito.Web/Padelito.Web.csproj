@@ -44,10 +44,12 @@
   <ItemGroup>
     <Content Include="Canchas.aspx" />
     <Content Include="Clientes.aspx" />
+    <Content Include="Content\dashboard.css" />
     <Content Include="Default.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="Site.Master" />
     <Content Include="TiposCancha.aspx" />
+    <Content Include="TurnosDisponibles.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +94,13 @@
     </Compile>
     <Compile Include="TiposCancha.aspx.designer.cs">
       <DependentUpon>TiposCancha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TurnosDisponibles.aspx.cs">
+      <DependentUpon>TurnosDisponibles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TurnosDisponibles.aspx.designer.cs">
+      <DependentUpon>TurnosDisponibles.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

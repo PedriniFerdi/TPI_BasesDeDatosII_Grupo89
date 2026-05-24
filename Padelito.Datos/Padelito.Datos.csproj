@@ -40,6 +40,7 @@
     <Compile Include="Repositorios\ClienteDatos.cs" />
     <Compile Include="Repositorios\EmpleadoDatos.cs" />
     <Compile Include="Repositorios\TiposCanchaDatos.cs" />
+    <Compile Include="Repositorios\TurnosDisponiblesDatos.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
