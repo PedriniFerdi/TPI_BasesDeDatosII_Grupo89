@@ -42,13 +42,22 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Canchas.aspx" />
     <Content Include="Clientes.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="TiposCancha.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Canchas.aspx.cs">
+      <DependentUpon>Canchas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Canchas.aspx.designer.cs">
+      <DependentUpon>Canchas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clientes.aspx.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -76,6 +85,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TiposCancha.aspx.cs">
+      <DependentUpon>TiposCancha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TiposCancha.aspx.designer.cs">
+      <DependentUpon>TiposCancha.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

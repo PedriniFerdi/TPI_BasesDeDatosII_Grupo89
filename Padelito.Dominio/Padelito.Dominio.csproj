@@ -27,8 +27,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\Cancha.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empleado.cs" />
+    <Compile Include="Entidades\TiposCancha.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

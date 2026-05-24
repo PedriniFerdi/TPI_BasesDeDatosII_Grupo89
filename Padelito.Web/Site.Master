@@ -16,6 +16,8 @@
                 <div class="navbar-nav">
                     <a class="nav-link" href="Clientes.aspx">Clientes</a>
                     <a class="nav-link" href="Empleados.aspx">Empleados</a>
+                    <a class="nav-link" href="TiposCancha.aspx">Tipos cancha</a>
+                    <a class="nav-link" href="Canchas.aspx">Canchas</a>
                 </div>
             </div>
         </nav>
