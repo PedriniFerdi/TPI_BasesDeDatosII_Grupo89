@@ -17,9 +17,11 @@ namespace Padelito.Datos.Repositorios
 
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"SELECT IdCliente, Nombre, Apellido, Telefono, Email, Activo, FechaAlta
-                  FROM Clientes
-                  ORDER BY Apellido, Nombre", conexion))
+                @"SELECT c.IdCliente, c.IdPersona, p.Nombre, p.Apellido, p.Telefono, p.Email,
+                         p.Activo, p.FechaAlta
+                  FROM Clientes c
+                  INNER JOIN Personas p ON p.IdPersona = c.IdPersona
+                  ORDER BY p.Apellido, p.Nombre", conexion))
             {
                 conexion.Open();
 
@@ -39,9 +41,11 @@ namespace Padelito.Datos.Repositorios
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"SELECT IdCliente, Nombre, Apellido, Telefono, Email, Activo, FechaAlta
-                  FROM Clientes
-                  WHERE IdCliente = @IdCliente", conexion))
+                @"SELECT c.IdCliente, c.IdPersona, p.Nombre, p.Apellido, p.Telefono, p.Email,
+                         p.Activo, p.FechaAlta
+                  FROM Clientes c
+                  INNER JOIN Personas p ON p.IdPersona = c.IdPersona
+                  WHERE c.IdCliente = @IdCliente", conexion))
             {
                 comando.Parameters.Add("@IdCliente", SqlDbType.Int).Value = idCliente;
                 conexion.Open();
@@ -56,13 +60,38 @@ namespace Padelito.Datos.Repositorios
         public void Agregar(Cliente cliente)
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())
-            using (SqlCommand comando = new SqlCommand(
-                @"INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-                  VALUES (@Nombre, @Apellido, @Telefono, @Email, @Activo)", conexion))
             {
-                CargarParametros(comando, cliente);
                 conexion.Open();
-                comando.ExecuteNonQuery();
+
+                using (SqlTransaction transaccion = conexion.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand comandoPersona = new SqlCommand(
+                            @"INSERT INTO Personas (Nombre, Apellido, Telefono, Email, Activo)
+                              VALUES (@Nombre, @Apellido, @Telefono, @Email, @Activo);
+                              SELECT CAST(SCOPE_IDENTITY() AS INT);", conexion, transaccion))
+                        {
+                            CargarParametrosPersona(comandoPersona, cliente);
+                            cliente.IdPersona = Convert.ToInt32(comandoPersona.ExecuteScalar());
+                        }
+
+                        using (SqlCommand comandoCliente = new SqlCommand(
+                            @"INSERT INTO Clientes (IdPersona)
+                              VALUES (@IdPersona)", conexion, transaccion))
+                        {
+                            comandoCliente.Parameters.Add("@IdPersona", SqlDbType.Int).Value = cliente.IdPersona;
+                            comandoCliente.ExecuteNonQuery();
+                        }
+
+                        transaccion.Commit();
+                    }
+                    catch
+                    {
+                        transaccion.Rollback();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -70,16 +99,18 @@ namespace Padelito.Datos.Repositorios
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"UPDATE Clientes
+                @"UPDATE p
                   SET Nombre = @Nombre,
                       Apellido = @Apellido,
                       Telefono = @Telefono,
                       Email = @Email,
                       Activo = @Activo
-                  WHERE IdCliente = @IdCliente", conexion))
+                  FROM Personas p
+                  INNER JOIN Clientes c ON c.IdPersona = p.IdPersona
+                  WHERE c.IdCliente = @IdCliente", conexion))
             {
                 comando.Parameters.Add("@IdCliente", SqlDbType.Int).Value = cliente.IdCliente;
-                CargarParametros(comando, cliente);
+                CargarParametrosPersona(comando, cliente);
                 conexion.Open();
                 comando.ExecuteNonQuery();
             }
@@ -89,9 +120,11 @@ namespace Padelito.Datos.Repositorios
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"UPDATE Clientes
+                @"UPDATE p
                   SET Activo = 0
-                  WHERE IdCliente = @IdCliente", conexion))
+                  FROM Personas p
+                  INNER JOIN Clientes c ON c.IdPersona = p.IdPersona
+                  WHERE c.IdCliente = @IdCliente", conexion))
             {
                 comando.Parameters.Add("@IdCliente", SqlDbType.Int).Value = idCliente;
                 conexion.Open();
@@ -99,7 +132,7 @@ namespace Padelito.Datos.Repositorios
             }
         }
 
-        private static void CargarParametros(SqlCommand comando, Cliente cliente)
+        private static void CargarParametrosPersona(SqlCommand comando, Cliente cliente)
         {
             comando.Parameters.Add("@Nombre", SqlDbType.VarChar, 50).Value = cliente.Nombre;
             comando.Parameters.Add("@Apellido", SqlDbType.VarChar, 50).Value = cliente.Apellido;
@@ -113,6 +146,7 @@ namespace Padelito.Datos.Repositorios
             return new Cliente
             {
                 IdCliente = Convert.ToInt32(lector["IdCliente"]),
+                IdPersona = Convert.ToInt32(lector["IdPersona"]),
                 Nombre = lector["Nombre"].ToString(),
                 Apellido = lector["Apellido"].ToString(),
                 Telefono = lector["Telefono"] == DBNull.Value ? string.Empty : lector["Telefono"].ToString(),
