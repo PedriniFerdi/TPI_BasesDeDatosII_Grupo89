@@ -55,6 +55,11 @@ namespace Padelito.Negocio.Servicios
                 throw new ArgumentNullException("turnoDisponible");
             }
 
+            if (turnoDisponible.IdCancha <= 0)
+            {
+                throw new ArgumentException("Debe seleccionar una cancha.");
+            }
+
             if (turnoDisponible.HoraInicio == TimeSpan.Zero && turnoDisponible.HoraFin == TimeSpan.Zero)
             {
                 throw new ArgumentException("Debe ingresar la hora de inicio y la hora de fin.");

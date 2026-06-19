@@ -7,11 +7,13 @@ namespace Padelito.Web
     public partial class TurnosDisponibles : System.Web.UI.Page
     {
         private readonly TurnosDisponiblesNegocio _turnosDisponiblesNegocio = new TurnosDisponiblesNegocio();
+        private readonly CanchaNegocio _canchaNegocio = new CanchaNegocio();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                CargarCanchas();
                 CargarGrilla();
             }
         }
@@ -64,6 +66,15 @@ namespace Padelito.Web
             }
         }
 
+        private void CargarCanchas()
+        {
+            ddlCancha.DataSource = _canchaNegocio.Listar();
+            ddlCancha.DataTextField = "Nombre";
+            ddlCancha.DataValueField = "IdCancha";
+            ddlCancha.DataBind();
+            ddlCancha.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione...", "0"));
+        }
+
         private void CargarGrilla()
         {
             gvTurnosDisponibles.DataSource = _turnosDisponiblesNegocio.Listar();
@@ -81,6 +92,7 @@ namespace Padelito.Web
             }
 
             hfIdTurnoDisponible.Value = turnoDisponible.IdTurnoDisponible.ToString();
+            ddlCancha.SelectedValue = turnoDisponible.IdCancha.ToString();
             txtHoraInicio.Text = turnoDisponible.HoraInicio.ToString(@"hh\:mm");
             txtHoraFin.Text = turnoDisponible.HoraFin.ToString(@"hh\:mm");
             chkActivo.Checked = turnoDisponible.Activo;
@@ -90,6 +102,9 @@ namespace Padelito.Web
         {
             int idTurnoDisponible = 0;
             int.TryParse(hfIdTurnoDisponible.Value, out idTurnoDisponible);
+
+            int idCancha = 0;
+            int.TryParse(ddlCancha.SelectedValue, out idCancha);
 
             TimeSpan horaInicio;
             if (!TimeSpan.TryParse(txtHoraInicio.Text.Trim(), out horaInicio))
@@ -106,6 +121,7 @@ namespace Padelito.Web
             return new Padelito.Dominio.Entidades.TurnosDisponibles
             {
                 IdTurnoDisponible = idTurnoDisponible,
+                IdCancha = idCancha,
                 HoraInicio = horaInicio,
                 HoraFin = horaFin,
                 Activo = chkActivo.Checked
@@ -115,6 +131,7 @@ namespace Padelito.Web
         private void LimpiarFormulario()
         {
             hfIdTurnoDisponible.Value = string.Empty;
+            ddlCancha.SelectedValue = "0";
             txtHoraInicio.Text = string.Empty;
             txtHoraFin.Text = string.Empty;
             chkActivo.Checked = true;

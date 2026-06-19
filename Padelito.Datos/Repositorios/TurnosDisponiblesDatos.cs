@@ -17,9 +17,11 @@ namespace Padelito.Datos.Repositorios
 
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"SELECT IdTurnoDisponible, HoraInicio, HoraFin, Activo
-                  FROM TurnosDisponibles
-                  ORDER BY HoraInicio", conexion))
+                @"SELECT td.IdTurnoDisponible, td.IdCancha, c.Nombre AS NombreCancha,
+                         td.HoraInicio, td.HoraFin, td.Activo
+                  FROM TurnosDisponibles td
+                  INNER JOIN Canchas c ON c.IdCancha = td.IdCancha
+                  ORDER BY c.Nombre, td.HoraInicio", conexion))
             {
                 conexion.Open();
 
@@ -39,9 +41,11 @@ namespace Padelito.Datos.Repositorios
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"SELECT IdTurnoDisponible, HoraInicio, HoraFin, Activo
-                  FROM TurnosDisponibles
-                  WHERE IdTurnoDisponible = @IdTurnoDisponible", conexion))
+                @"SELECT td.IdTurnoDisponible, td.IdCancha, c.Nombre AS NombreCancha,
+                         td.HoraInicio, td.HoraFin, td.Activo
+                  FROM TurnosDisponibles td
+                  INNER JOIN Canchas c ON c.IdCancha = td.IdCancha
+                  WHERE td.IdTurnoDisponible = @IdTurnoDisponible", conexion))
             {
                 comando.Parameters.Add("@IdTurnoDisponible", SqlDbType.Int).Value = idTurnoDisponible;
                 conexion.Open();
@@ -57,8 +61,8 @@ namespace Padelito.Datos.Repositorios
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
-                @"INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo)
-                  VALUES (@HoraInicio, @HoraFin, @Activo)", conexion))
+                @"INSERT INTO TurnosDisponibles (IdCancha, HoraInicio, HoraFin, Activo)
+                  VALUES (@IdCancha, @HoraInicio, @HoraFin, @Activo)", conexion))
             {
                 CargarParametros(comando, turnoDisponible);
                 conexion.Open();
@@ -71,7 +75,8 @@ namespace Padelito.Datos.Repositorios
             using (SqlConnection conexion = _conexionBD.CrearConexion())
             using (SqlCommand comando = new SqlCommand(
                 @"UPDATE TurnosDisponibles
-                  SET HoraInicio = @HoraInicio,
+                  SET IdCancha = @IdCancha,
+                      HoraInicio = @HoraInicio,
                       HoraFin = @HoraFin,
                       Activo = @Activo
                   WHERE IdTurnoDisponible = @IdTurnoDisponible", conexion))
@@ -99,6 +104,7 @@ namespace Padelito.Datos.Repositorios
 
         private static void CargarParametros(SqlCommand comando, TurnosDisponibles turnoDisponible)
         {
+            comando.Parameters.Add("@IdCancha", SqlDbType.Int).Value = turnoDisponible.IdCancha;
             comando.Parameters.Add("@HoraInicio", SqlDbType.Time).Value = turnoDisponible.HoraInicio;
             comando.Parameters.Add("@HoraFin", SqlDbType.Time).Value = turnoDisponible.HoraFin;
             comando.Parameters.Add("@Activo", SqlDbType.Bit).Value = turnoDisponible.Activo;
@@ -109,6 +115,8 @@ namespace Padelito.Datos.Repositorios
             return new TurnosDisponibles
             {
                 IdTurnoDisponible = Convert.ToInt32(lector["IdTurnoDisponible"]),
+                IdCancha = Convert.ToInt32(lector["IdCancha"]),
+                NombreCancha = lector["NombreCancha"].ToString(),
                 HoraInicio = (TimeSpan)lector["HoraInicio"],
                 HoraFin = (TimeSpan)lector["HoraFin"],
                 Activo = Convert.ToBoolean(lector["Activo"])

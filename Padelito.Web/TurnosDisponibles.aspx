@@ -9,6 +9,11 @@
                 <asp:HiddenField ID="hfIdTurnoDisponible" runat="server" />
 
                 <div class="mb-3">
+                    <label class="form-label" for="<%= ddlCancha.ClientID %>">Cancha</label>
+                    <asp:DropDownList ID="ddlCancha" runat="server" CssClass="form-select" />
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label" for="<%= txtHoraInicio.ClientID %>">Hora inicio</label>
                     <asp:TextBox ID="txtHoraInicio" runat="server" CssClass="form-control" TextMode="Time" />
                 </div>
@@ -44,6 +49,7 @@
                     OnRowCommand="gvTurnosDisponibles_RowCommand">
                     <Columns>
                         <asp:BoundField DataField="IdTurnoDisponible" HeaderText="ID" />
+                        <asp:BoundField DataField="NombreCancha" HeaderText="Cancha" />
                         <asp:BoundField DataField="Horario" HeaderText="Horario" />
                         <asp:CheckBoxField DataField="Activo" HeaderText="Activo" />
                         <asp:TemplateField HeaderText="Acciones">

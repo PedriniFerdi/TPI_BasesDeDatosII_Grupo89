@@ -5,6 +5,8 @@ namespace Padelito.Dominio.Entidades
     public class TurnosDisponibles
     {
         public int IdTurnoDisponible { get; set; }
+        public int IdCancha { get; set; }
+        public string NombreCancha { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
         public bool Activo { get; set; }
