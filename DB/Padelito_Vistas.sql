@@ -16,12 +16,12 @@ AS
 SELECT
     r.IdReserva,
     r.FechaReserva,
-    c.Nombre + ' ' + c.Apellido AS Cliente,
+    pc.Nombre + ' ' + pc.Apellido AS Cliente,
     ca.Nombre AS Cancha,
     tc.Descripcion AS TipoCancha,
     td.HoraInicio,
     td.HoraFin,
-    e.Nombre + ' ' + e.Apellido AS Empleado,
+    pe.Nombre + ' ' + pe.Apellido AS Empleado,
     er.Descripcion AS EstadoReserva,
     p.Nombre AS Promocion,
     r.PrecioBase,
@@ -29,10 +29,12 @@ SELECT
     r.FechaCreacion
 FROM Reservas r
 INNER JOIN Clientes c ON r.IdCliente = c.IdCliente
-INNER JOIN Canchas ca ON r.IdCancha = ca.IdCancha
-INNER JOIN TiposCancha tc ON ca.IdTipoCancha = tc.IdTipoCancha
+INNER JOIN Personas pc ON c.IdPersona = pc.IdPersona
 INNER JOIN TurnosDisponibles td ON r.IdTurnoDisponible = td.IdTurnoDisponible
+INNER JOIN Canchas ca ON td.IdCancha = ca.IdCancha
+INNER JOIN TiposCancha tc ON ca.IdTipoCancha = tc.IdTipoCancha
 INNER JOIN Empleados e ON r.IdEmpleado = e.IdEmpleado
+INNER JOIN Personas pe ON e.IdPersona = pe.IdPersona
 INNER JOIN EstadosReserva er ON r.IdEstadoReserva = er.IdEstadoReserva
 LEFT JOIN Promociones p ON r.IdPromocion = p.IdPromocion;
 GO
@@ -47,7 +49,7 @@ AS
 SELECT
     p.IdPago,
     p.IdReserva,
-    c.Nombre + ' ' + c.Apellido AS Cliente,
+    pc.Nombre + ' ' + pc.Apellido AS Cliente,
     ca.Nombre AS Cancha,
     r.FechaReserva,
     mp.Descripcion AS MetodoPago,
@@ -57,7 +59,9 @@ SELECT
 FROM Pagos p
 INNER JOIN Reservas r ON p.IdReserva = r.IdReserva
 INNER JOIN Clientes c ON r.IdCliente = c.IdCliente
-INNER JOIN Canchas ca ON r.IdCancha = ca.IdCancha
+INNER JOIN Personas pc ON c.IdPersona = pc.IdPersona
+INNER JOIN TurnosDisponibles td ON r.IdTurnoDisponible = td.IdTurnoDisponible
+INNER JOIN Canchas ca ON td.IdCancha = ca.IdCancha
 INNER JOIN MetodosPago mp ON p.IdMetodoPago = mp.IdMetodoPago;
 GO
 

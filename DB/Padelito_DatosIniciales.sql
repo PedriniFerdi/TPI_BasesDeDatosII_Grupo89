@@ -3,7 +3,7 @@
    Ejecutar despues de Padelito_DB.sql, Padelito_Triggers.sql,
    Padelito_Vistas.sql y Padelito_StoredProcedures.sql.
 
-   Este script evita duplicar registros si se ejecuta
+   Script idempotente: evita duplicar registros si se ejecuta
    mas de una vez.
    ============================================================ */
 
@@ -69,69 +69,112 @@ BEGIN TRY
         INSERT INTO TiposCancha (Descripcion) VALUES ('Premium');
 
     /* ========================================================
-       PERSONAS
+       PERSONAS, CLIENTES Y EMPLEADOS
        ======================================================== */
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'juan.perez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Juan', 'Perez', '11-2456-7788', 'juan.perez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'juan.perez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Juan', 'Perez', NULL, '11-2456-7788', 'juan.perez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'maria.gomez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Maria', 'Gomez', '11-3654-2210', 'maria.gomez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'maria.gomez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Maria', 'Gomez', NULL, '11-3654-2210', 'maria.gomez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'lucas.fernandez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Lucas', 'Fernandez', '11-4890-1133', 'lucas.fernandez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'lucas.fernandez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Lucas', 'Fernandez', NULL, '11-4890-1133', 'lucas.fernandez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'sofia.ramirez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Sofia', 'Ramirez', '11-6021-9044', 'sofia.ramirez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'sofia.ramirez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Sofia', 'Ramirez', NULL, '11-6021-9044', 'sofia.ramirez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'diego.suarez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Diego', 'Suarez', '11-7012-3321', 'diego.suarez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'diego.suarez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Diego', 'Suarez', NULL, '11-7012-3321', 'diego.suarez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'carolina.mendez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Carolina', 'Mendez', '11-5588-1200', 'carolina.mendez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'carolina.mendez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Carolina', 'Mendez', NULL, '11-5588-1200', 'carolina.mendez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'tomas.acosta@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Tomas', 'Acosta', '11-2345-9081', 'tomas.acosta@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'tomas.acosta@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Tomas', 'Acosta', NULL, '11-2345-9081', 'tomas.acosta@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE Email = 'valentina.lopez@mail.com')
-        INSERT INTO Clientes (Nombre, Apellido, Telefono, Email, Activo)
-        VALUES ('Valentina', 'Lopez', '11-6789-2214', 'valentina.lopez@mail.com', 1);
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE Email = 'valentina.lopez@mail.com')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
+        VALUES ('Valentina', 'Lopez', NULL, '11-6789-2214', 'valentina.lopez@mail.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Empleados WHERE DNI = '30111222')
-        INSERT INTO Empleados (Nombre, Apellido, DNI, Telefono, Email, Activo)
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE DNI = '30111222')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
         VALUES ('Carlos', 'Benitez', '30111222', '11-4000-1001', 'carlos.benitez@padelito.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Empleados WHERE DNI = '32654321')
-        INSERT INTO Empleados (Nombre, Apellido, DNI, Telefono, Email, Activo)
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE DNI = '32654321')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
         VALUES ('Andrea', 'Molina', '32654321', '11-4000-1002', 'andrea.molina@padelito.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Empleados WHERE DNI = '28444777')
-        INSERT INTO Empleados (Nombre, Apellido, DNI, Telefono, Email, Activo)
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE DNI = '28444777')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
         VALUES ('Federico', 'Castro', '28444777', '11-4000-1003', 'federico.castro@padelito.com', 1);
 
-    IF NOT EXISTS (SELECT 1 FROM Empleados WHERE DNI = '35123987')
-        INSERT INTO Empleados (Nombre, Apellido, DNI, Telefono, Email, Activo)
+    IF NOT EXISTS (SELECT 1 FROM Personas WHERE DNI = '35123987')
+        INSERT INTO Personas (Nombre, Apellido, DNI, Telefono, Email, Activo)
         VALUES ('Natalia', 'Rojas', '35123987', '11-4000-1004', 'natalia.rojas@padelito.com', 1);
+
+    INSERT INTO Clientes (IdPersona)
+    SELECT p.IdPersona
+    FROM Personas p
+    WHERE p.Email IN (
+        'juan.perez@mail.com',
+        'maria.gomez@mail.com',
+        'lucas.fernandez@mail.com',
+        'sofia.ramirez@mail.com',
+        'diego.suarez@mail.com',
+        'carolina.mendez@mail.com',
+        'tomas.acosta@mail.com',
+        'valentina.lopez@mail.com'
+    )
+      AND NOT EXISTS (SELECT 1 FROM Clientes c WHERE c.IdPersona = p.IdPersona);
+
+    INSERT INTO Empleados (IdPersona)
+    SELECT p.IdPersona
+    FROM Personas p
+    WHERE p.DNI IN ('30111222', '32654321', '28444777', '35123987')
+      AND NOT EXISTS (SELECT 1 FROM Empleados e WHERE e.IdPersona = p.IdPersona);
 
     /* ========================================================
        USUARIOS DEL SISTEMA
+       Nota: las contrasenias son de prueba y deberian reemplazarse
+       por hashes reales si se implementa login.
        ======================================================== */
 
     DECLARE @IdRolAdministrador INT = (SELECT IdRol FROM Roles WHERE Descripcion = 'Administrador');
     DECLARE @IdRolEmpleado INT = (SELECT IdRol FROM Roles WHERE Descripcion = 'Empleado');
     DECLARE @IdRolRecepcion INT = (SELECT IdRol FROM Roles WHERE Descripcion = 'Recepcion');
 
-    DECLARE @IdEmpleadoCarlos INT = (SELECT IdEmpleado FROM Empleados WHERE DNI = '30111222');
-    DECLARE @IdEmpleadoAndrea INT = (SELECT IdEmpleado FROM Empleados WHERE DNI = '32654321');
-    DECLARE @IdEmpleadoFederico INT = (SELECT IdEmpleado FROM Empleados WHERE DNI = '28444777');
-    DECLARE @IdEmpleadoNatalia INT = (SELECT IdEmpleado FROM Empleados WHERE DNI = '35123987');
+    DECLARE @IdEmpleadoCarlos INT = (
+        SELECT e.IdEmpleado
+        FROM Empleados e
+        INNER JOIN Personas p ON e.IdPersona = p.IdPersona
+        WHERE p.DNI = '30111222'
+    );
+    DECLARE @IdEmpleadoAndrea INT = (
+        SELECT e.IdEmpleado
+        FROM Empleados e
+        INNER JOIN Personas p ON e.IdPersona = p.IdPersona
+        WHERE p.DNI = '32654321'
+    );
+    DECLARE @IdEmpleadoFederico INT = (
+        SELECT e.IdEmpleado
+        FROM Empleados e
+        INNER JOIN Personas p ON e.IdPersona = p.IdPersona
+        WHERE p.DNI = '28444777'
+    );
+    DECLARE @IdEmpleadoNatalia INT = (
+        SELECT e.IdEmpleado
+        FROM Empleados e
+        INNER JOIN Personas p ON e.IdPersona = p.IdPersona
+        WHERE p.DNI = '35123987'
+    );
 
     IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE NombreUsuario = 'admin')
        AND NOT EXISTS (SELECT 1 FROM Usuarios WHERE IdEmpleado = @IdEmpleadoCarlos)
@@ -182,35 +225,30 @@ BEGIN TRY
         INSERT INTO Canchas (Nombre, IdTipoCancha, PrecioHora, Activa)
         VALUES ('Cancha Mantenimiento', @IdTipoCemento, 7500.00, 0);
 
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '08:00' AND HoraFin = '09:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('08:00', '09:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '09:00' AND HoraFin = '10:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('09:00', '10:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '10:00' AND HoraFin = '11:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('10:00', '11:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '11:00' AND HoraFin = '12:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('11:00', '12:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '17:00' AND HoraFin = '18:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('17:00', '18:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '18:00' AND HoraFin = '19:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('18:00', '19:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '19:00' AND HoraFin = '20:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('19:00', '20:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '20:00' AND HoraFin = '21:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('20:00', '21:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '21:00' AND HoraFin = '22:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('21:00', '22:00', 1);
-
-    IF NOT EXISTS (SELECT 1 FROM TurnosDisponibles WHERE HoraInicio = '22:00' AND HoraFin = '23:00')
-        INSERT INTO TurnosDisponibles (HoraInicio, HoraFin, Activo) VALUES ('22:00', '23:00', 1);
+    INSERT INTO TurnosDisponibles (IdCancha, HoraInicio, HoraFin, Activo)
+    SELECT c.IdCancha, h.HoraInicio, h.HoraFin, 1
+    FROM Canchas c
+    CROSS JOIN (
+        VALUES
+            (CAST('08:00' AS TIME), CAST('09:00' AS TIME)),
+            (CAST('09:00' AS TIME), CAST('10:00' AS TIME)),
+            (CAST('10:00' AS TIME), CAST('11:00' AS TIME)),
+            (CAST('11:00' AS TIME), CAST('12:00' AS TIME)),
+            (CAST('17:00' AS TIME), CAST('18:00' AS TIME)),
+            (CAST('18:00' AS TIME), CAST('19:00' AS TIME)),
+            (CAST('19:00' AS TIME), CAST('20:00' AS TIME)),
+            (CAST('20:00' AS TIME), CAST('21:00' AS TIME)),
+            (CAST('21:00' AS TIME), CAST('22:00' AS TIME)),
+            (CAST('22:00' AS TIME), CAST('23:00' AS TIME))
+    ) h(HoraInicio, HoraFin)
+    WHERE c.Activa = 1
+      AND NOT EXISTS (
+          SELECT 1
+          FROM TurnosDisponibles td
+          WHERE td.IdCancha = c.IdCancha
+            AND td.HoraInicio = h.HoraInicio
+            AND td.HoraFin = h.HoraFin
+      );
 
     /* ========================================================
        PROMOCIONES
@@ -236,28 +274,44 @@ BEGIN TRY
        RESERVAS
        ======================================================== */
 
-    DECLARE @IdClienteJuan INT = (SELECT IdCliente FROM Clientes WHERE Email = 'juan.perez@mail.com');
-    DECLARE @IdClienteMaria INT = (SELECT IdCliente FROM Clientes WHERE Email = 'maria.gomez@mail.com');
-    DECLARE @IdClienteLucas INT = (SELECT IdCliente FROM Clientes WHERE Email = 'lucas.fernandez@mail.com');
-    DECLARE @IdClienteSofia INT = (SELECT IdCliente FROM Clientes WHERE Email = 'sofia.ramirez@mail.com');
-    DECLARE @IdClienteDiego INT = (SELECT IdCliente FROM Clientes WHERE Email = 'diego.suarez@mail.com');
-    DECLARE @IdClienteCarolina INT = (SELECT IdCliente FROM Clientes WHERE Email = 'carolina.mendez@mail.com');
-    DECLARE @IdClienteTomas INT = (SELECT IdCliente FROM Clientes WHERE Email = 'tomas.acosta@mail.com');
-    DECLARE @IdClienteValentina INT = (SELECT IdCliente FROM Clientes WHERE Email = 'valentina.lopez@mail.com');
+    DECLARE @IdClienteJuan INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'juan.perez@mail.com'
+    );
+    DECLARE @IdClienteMaria INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'maria.gomez@mail.com'
+    );
+    DECLARE @IdClienteLucas INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'lucas.fernandez@mail.com'
+    );
+    DECLARE @IdClienteSofia INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'sofia.ramirez@mail.com'
+    );
+    DECLARE @IdClienteDiego INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'diego.suarez@mail.com'
+    );
+    DECLARE @IdClienteCarolina INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'carolina.mendez@mail.com'
+    );
+    DECLARE @IdClienteTomas INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'tomas.acosta@mail.com'
+    );
+    DECLARE @IdClienteValentina INT = (
+        SELECT c.IdCliente FROM Clientes c INNER JOIN Personas p ON c.IdPersona = p.IdPersona WHERE p.Email = 'valentina.lopez@mail.com'
+    );
 
     DECLARE @IdCancha1 INT = (SELECT IdCancha FROM Canchas WHERE Nombre = 'Cancha 1');
     DECLARE @IdCancha2 INT = (SELECT IdCancha FROM Canchas WHERE Nombre = 'Cancha 2');
     DECLARE @IdCancha3 INT = (SELECT IdCancha FROM Canchas WHERE Nombre = 'Cancha 3');
     DECLARE @IdCanchaPremium INT = (SELECT IdCancha FROM Canchas WHERE Nombre = 'Cancha Premium');
 
-    DECLARE @IdTurno0800 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '08:00' AND HoraFin = '09:00');
-    DECLARE @IdTurno0900 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '09:00' AND HoraFin = '10:00');
-    DECLARE @IdTurno1000 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '10:00' AND HoraFin = '11:00');
-    DECLARE @IdTurno1700 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '17:00' AND HoraFin = '18:00');
-    DECLARE @IdTurno1800 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '18:00' AND HoraFin = '19:00');
-    DECLARE @IdTurno1900 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '19:00' AND HoraFin = '20:00');
-    DECLARE @IdTurno2000 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '20:00' AND HoraFin = '21:00');
-    DECLARE @IdTurno2100 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE HoraInicio = '21:00' AND HoraFin = '22:00');
+    DECLARE @IdTurnoC1_0800 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCancha1 AND HoraInicio = '08:00' AND HoraFin = '09:00');
+    DECLARE @IdTurnoC2_0900 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCancha2 AND HoraInicio = '09:00' AND HoraFin = '10:00');
+    DECLARE @IdTurnoC3_1800 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCancha3 AND HoraInicio = '18:00' AND HoraFin = '19:00');
+    DECLARE @IdTurnoPremium_1900 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCanchaPremium AND HoraInicio = '19:00' AND HoraFin = '20:00');
+    DECLARE @IdTurnoC1_2000 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCancha1 AND HoraInicio = '20:00' AND HoraFin = '21:00');
+    DECLARE @IdTurnoC2_2100 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCancha2 AND HoraInicio = '21:00' AND HoraFin = '22:00');
+    DECLARE @IdTurnoC3_1700 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCancha3 AND HoraInicio = '17:00' AND HoraFin = '18:00');
+    DECLARE @IdTurnoPremium_1000 INT = (SELECT IdTurnoDisponible FROM TurnosDisponibles WHERE IdCancha = @IdCanchaPremium AND HoraInicio = '10:00' AND HoraFin = '11:00');
 
     DECLARE @IdEstadoPendiente INT = (SELECT IdEstadoReserva FROM EstadosReserva WHERE Descripcion = 'Pendiente');
     DECLARE @IdEstadoConfirmada INT = (SELECT IdEstadoReserva FROM EstadosReserva WHERE Descripcion = 'Confirmada');
@@ -268,37 +322,37 @@ BEGIN TRY
     DECLARE @IdPromoSocios INT = (SELECT IdPromocion FROM Promociones WHERE Nombre = 'Socios Frecuentes');
     DECLARE @IdPromoFinSemana INT = (SELECT IdPromocion FROM Promociones WHERE Nombre = 'Fin de Semana');
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCancha1 AND FechaReserva = '2026-06-03' AND IdTurnoDisponible = @IdTurno0800)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteJuan, @IdCancha1, @IdTurno0800, @IdEmpleadoAndrea, @IdPromoManiana, '2026-06-03', @IdEstadoConfirmada, 8000.00, 7200.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-03' AND IdTurnoDisponible = @IdTurnoC1_0800)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteJuan, @IdTurnoC1_0800, @IdEmpleadoAndrea, @IdPromoManiana, '2026-06-03', @IdEstadoConfirmada, 8000.00, 7200.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCancha2 AND FechaReserva = '2026-06-03' AND IdTurnoDisponible = @IdTurno0900)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteMaria, @IdCancha2, @IdTurno0900, @IdEmpleadoAndrea, @IdPromoManiana, '2026-06-03', @IdEstadoPendiente, 9500.00, 8550.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-03' AND IdTurnoDisponible = @IdTurnoC2_0900)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteMaria, @IdTurnoC2_0900, @IdEmpleadoAndrea, @IdPromoManiana, '2026-06-03', @IdEstadoPendiente, 9500.00, 8550.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCancha3 AND FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurno1800)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteLucas, @IdCancha3, @IdTurno1800, @IdEmpleadoFederico, NULL, '2026-06-04', @IdEstadoConfirmada, 11000.00, 11000.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurnoC3_1800)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteLucas, @IdTurnoC3_1800, @IdEmpleadoFederico, NULL, '2026-06-04', @IdEstadoConfirmada, 11000.00, 11000.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCanchaPremium AND FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurno1900)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteSofia, @IdCanchaPremium, @IdTurno1900, @IdEmpleadoNatalia, @IdPromoSocios, '2026-06-04', @IdEstadoConfirmada, 13500.00, 11475.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurnoPremium_1900)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteSofia, @IdTurnoPremium_1900, @IdEmpleadoNatalia, @IdPromoSocios, '2026-06-04', @IdEstadoConfirmada, 13500.00, 11475.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCancha1 AND FechaReserva = '2026-06-05' AND IdTurnoDisponible = @IdTurno2000)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteDiego, @IdCancha1, @IdTurno2000, @IdEmpleadoAndrea, NULL, '2026-06-05', @IdEstadoFinalizada, 8000.00, 8000.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-05' AND IdTurnoDisponible = @IdTurnoC1_2000)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteDiego, @IdTurnoC1_2000, @IdEmpleadoAndrea, NULL, '2026-06-05', @IdEstadoFinalizada, 8000.00, 8000.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCancha2 AND FechaReserva = '2026-06-05' AND IdTurnoDisponible = @IdTurno2100)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteCarolina, @IdCancha2, @IdTurno2100, @IdEmpleadoFederico, NULL, '2026-06-05', @IdEstadoCancelada, 9500.00, 9500.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-05' AND IdTurnoDisponible = @IdTurnoC2_2100)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteCarolina, @IdTurnoC2_2100, @IdEmpleadoFederico, NULL, '2026-06-05', @IdEstadoCancelada, 9500.00, 9500.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCancha3 AND FechaReserva = '2026-06-06' AND IdTurnoDisponible = @IdTurno1700)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteTomas, @IdCancha3, @IdTurno1700, @IdEmpleadoNatalia, @IdPromoFinSemana, '2026-06-06', @IdEstadoConfirmada, 11000.00, 10450.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-06' AND IdTurnoDisponible = @IdTurnoC3_1700)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteTomas, @IdTurnoC3_1700, @IdEmpleadoNatalia, @IdPromoFinSemana, '2026-06-06', @IdEstadoConfirmada, 11000.00, 10450.00);
 
-    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE IdCancha = @IdCanchaPremium AND FechaReserva = '2026-06-07' AND IdTurnoDisponible = @IdTurno1000)
-        INSERT INTO Reservas (IdCliente, IdCancha, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
-        VALUES (@IdClienteValentina, @IdCanchaPremium, @IdTurno1000, @IdEmpleadoAndrea, @IdPromoManiana, '2026-06-07', @IdEstadoPendiente, 13500.00, 12150.00);
+    IF NOT EXISTS (SELECT 1 FROM Reservas WHERE FechaReserva = '2026-06-07' AND IdTurnoDisponible = @IdTurnoPremium_1000)
+        INSERT INTO Reservas (IdCliente, IdTurnoDisponible, IdEmpleado, IdPromocion, FechaReserva, IdEstadoReserva, PrecioBase, PrecioFinal)
+        VALUES (@IdClienteValentina, @IdTurnoPremium_1000, @IdEmpleadoAndrea, @IdPromoManiana, '2026-06-07', @IdEstadoPendiente, 13500.00, 12150.00);
 
     /* ========================================================
        PAGOS
@@ -310,11 +364,11 @@ BEGIN TRY
     DECLARE @IdMetodoTransferencia INT = (SELECT IdMetodoPago FROM MetodosPago WHERE Descripcion = 'Transferencia');
     DECLARE @IdMetodoMercadoPago INT = (SELECT IdMetodoPago FROM MetodosPago WHERE Descripcion = 'Mercado Pago');
 
-    DECLARE @IdReservaJuan INT = (SELECT IdReserva FROM Reservas WHERE IdCancha = @IdCancha1 AND FechaReserva = '2026-06-03' AND IdTurnoDisponible = @IdTurno0800);
-    DECLARE @IdReservaLucas INT = (SELECT IdReserva FROM Reservas WHERE IdCancha = @IdCancha3 AND FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurno1800);
-    DECLARE @IdReservaSofia INT = (SELECT IdReserva FROM Reservas WHERE IdCancha = @IdCanchaPremium AND FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurno1900);
-    DECLARE @IdReservaDiego INT = (SELECT IdReserva FROM Reservas WHERE IdCancha = @IdCancha1 AND FechaReserva = '2026-06-05' AND IdTurnoDisponible = @IdTurno2000);
-    DECLARE @IdReservaTomas INT = (SELECT IdReserva FROM Reservas WHERE IdCancha = @IdCancha3 AND FechaReserva = '2026-06-06' AND IdTurnoDisponible = @IdTurno1700);
+    DECLARE @IdReservaJuan INT = (SELECT IdReserva FROM Reservas WHERE FechaReserva = '2026-06-03' AND IdTurnoDisponible = @IdTurnoC1_0800);
+    DECLARE @IdReservaLucas INT = (SELECT IdReserva FROM Reservas WHERE FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurnoC3_1800);
+    DECLARE @IdReservaSofia INT = (SELECT IdReserva FROM Reservas WHERE FechaReserva = '2026-06-04' AND IdTurnoDisponible = @IdTurnoPremium_1900);
+    DECLARE @IdReservaDiego INT = (SELECT IdReserva FROM Reservas WHERE FechaReserva = '2026-06-05' AND IdTurnoDisponible = @IdTurnoC1_2000);
+    DECLARE @IdReservaTomas INT = (SELECT IdReserva FROM Reservas WHERE FechaReserva = '2026-06-06' AND IdTurnoDisponible = @IdTurnoC3_1700);
 
     IF NOT EXISTS (SELECT 1 FROM Pagos WHERE IdReserva = @IdReservaJuan AND Monto = 7200.00)
         INSERT INTO Pagos (IdReserva, IdMetodoPago, Monto, Observacion)
@@ -350,7 +404,8 @@ GO
    CONSULTAS DE CONTROL
    ============================================================ */
 
-SELECT 'Clientes' AS Tabla, COUNT(*) AS Cantidad FROM Clientes
+SELECT 'Personas' AS Tabla, COUNT(*) AS Cantidad FROM Personas
+UNION ALL SELECT 'Clientes', COUNT(*) FROM Clientes
 UNION ALL SELECT 'Empleados', COUNT(*) FROM Empleados
 UNION ALL SELECT 'Roles', COUNT(*) FROM Roles
 UNION ALL SELECT 'Usuarios', COUNT(*) FROM Usuarios

@@ -1,6 +1,8 @@
 /* ============================================================
    PADELITO_DB - TRIGGERS
-   Triggers de auditoria para reservas
+   Triggers de auditoria para reservas.
+   Las reservas no se eliminan fisicamente: las bajas se representan
+   cambiando su estado, para conservar la relacion con AuditoriaReservas.
    ============================================================ */
 
 USE PADELITO_DB
@@ -57,32 +59,5 @@ BEGIN
         'Se modifico una reserva.',
         SUSER_SNAME()
     FROM inserted i;
-END;
-GO
-
-/* ============================================================
-   TRIGGER TRAS UNA ELIMINACION
-   Registra en AuditoriaReservas cuando se elimina una reserva.
-   ============================================================ */
-
-CREATE TRIGGER TR_Reservas_Delete
-ON Reservas
-AFTER DELETE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    INSERT INTO AuditoriaReservas (
-        IdReserva,
-        Accion,
-        Descripcion,
-        UsuarioSistema
-    )
-    SELECT
-        d.IdReserva,
-        'DELETE',
-        'Se elimino una reserva.',
-        SUSER_SNAME()
-    FROM deleted d;
 END;
 GO

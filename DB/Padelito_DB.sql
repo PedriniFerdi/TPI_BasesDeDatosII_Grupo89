@@ -22,10 +22,11 @@ GO
    TABLAS
    ============================================================ */
 
-CREATE TABLE Clientes(
-    IdCliente INT IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE Personas(
+    IdPersona INT IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
+    DNI VARCHAR(20) NULL,
     Telefono VARCHAR(30),
     Email VARCHAR(100),
     Activo BIT NOT NULL DEFAULT 1,
@@ -33,26 +34,32 @@ CREATE TABLE Clientes(
 );
 GO
 
+CREATE UNIQUE INDEX UX_Personas_DNI
+ON Personas(DNI)
+WHERE DNI IS NOT NULL;
+GO
+
+CREATE TABLE Clientes(
+    IdCliente INT IDENTITY(1,1) PRIMARY KEY,
+    IdPersona INT NOT NULL UNIQUE,
+
+    FOREIGN KEY (IdPersona) REFERENCES Personas(IdPersona)
+);
+GO
 
 CREATE TABLE Empleados(
     IdEmpleado INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(50) NOT NULL,
-    Apellido VARCHAR(50) NOT NULL,
-    DNI VARCHAR(20) NOT NULL UNIQUE,
-    Telefono VARCHAR(30),
-    Email VARCHAR(100),
-    Activo BIT NOT NULL DEFAULT 1,
-    FechaAlta DATETIME NOT NULL DEFAULT GETDATE()
+    IdPersona INT NOT NULL UNIQUE,
+
+    FOREIGN KEY (IdPersona) REFERENCES Personas(IdPersona)
 );
 GO
-
 
 CREATE TABLE Roles(
     IdRol INT IDENTITY(1,1) PRIMARY KEY,
     Descripcion VARCHAR(50) NOT NULL UNIQUE
 );
 GO
-
 
 CREATE TABLE Usuarios(
     IdUsuario INT IDENTITY(1,1) PRIMARY KEY,
@@ -87,12 +94,14 @@ GO
 
 CREATE TABLE TurnosDisponibles(
     IdTurnoDisponible INT IDENTITY(1,1) PRIMARY KEY,
+    IdCancha INT NOT NULL,
     HoraInicio TIME NOT NULL,
     HoraFin TIME NOT NULL,
     Activo BIT NOT NULL DEFAULT 1,
 
     CHECK (HoraFin > HoraInicio),
-    UNIQUE (HoraInicio, HoraFin)
+    CONSTRAINT UQ_TurnosDisponibles_Cancha_Horario UNIQUE (IdCancha, HoraInicio, HoraFin),
+    FOREIGN KEY (IdCancha) REFERENCES Canchas(IdCancha)
 );
 GO
 
@@ -118,7 +127,6 @@ GO
 CREATE TABLE Reservas(
     IdReserva INT IDENTITY(1,1) PRIMARY KEY,
     IdCliente INT NOT NULL,
-    IdCancha INT NOT NULL,
     IdTurnoDisponible INT NOT NULL,
     IdEmpleado INT NOT NULL,
     IdPromocion INT NULL,
@@ -128,10 +136,9 @@ CREATE TABLE Reservas(
     PrecioFinal DECIMAL(10,2) NOT NULL CHECK (PrecioFinal >= 0),
     FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
 
-    CONSTRAINT UQ_Reservas_Cancha_Fecha_Turno UNIQUE (IdCancha, FechaReserva, IdTurnoDisponible),
+    CONSTRAINT UQ_Reservas_Fecha_Turno UNIQUE (FechaReserva, IdTurnoDisponible),
 
     FOREIGN KEY (IdCliente) REFERENCES Clientes(IdCliente),
-    FOREIGN KEY (IdCancha) REFERENCES Canchas(IdCancha),
     FOREIGN KEY (IdTurnoDisponible) REFERENCES TurnosDisponibles(IdTurnoDisponible),
     FOREIGN KEY (IdEmpleado) REFERENCES Empleados(IdEmpleado),
     FOREIGN KEY (IdPromocion) REFERENCES Promociones(IdPromocion),
@@ -161,9 +168,11 @@ GO
 CREATE TABLE AuditoriaReservas(
     IdAuditoria INT IDENTITY(1,1) PRIMARY KEY,
     IdReserva INT NOT NULL,
-    Accion VARCHAR(20) NOT NULL CHECK (Accion IN ('INSERT', 'UPDATE', 'DELETE')),
+    Accion VARCHAR(20) NOT NULL CHECK (Accion IN ('INSERT', 'UPDATE')),
     Descripcion VARCHAR(500) NOT NULL,
     FechaAccion DATETIME NOT NULL DEFAULT GETDATE(),
-    UsuarioSistema VARCHAR(128) NOT NULL
+    UsuarioSistema VARCHAR(128) NOT NULL,
+
+    FOREIGN KEY (IdReserva) REFERENCES Reservas(IdReserva)
 );
 GO

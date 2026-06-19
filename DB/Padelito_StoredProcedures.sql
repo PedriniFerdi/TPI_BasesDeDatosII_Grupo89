@@ -23,7 +23,7 @@ BEGIN
     SELECT
         r.IdReserva,
         r.FechaReserva,
-        c.Nombre + ' ' + c.Apellido AS Cliente,
+        pc.Nombre + ' ' + pc.Apellido AS Cliente,
         ca.Nombre AS Cancha,
         td.HoraInicio,
         td.HoraFin,
@@ -32,8 +32,9 @@ BEGIN
         r.PrecioFinal
     FROM Reservas r
     INNER JOIN Clientes c ON r.IdCliente = c.IdCliente
-    INNER JOIN Canchas ca ON r.IdCancha = ca.IdCancha
+    INNER JOIN Personas pc ON c.IdPersona = pc.IdPersona
     INNER JOIN TurnosDisponibles td ON r.IdTurnoDisponible = td.IdTurnoDisponible
+    INNER JOIN Canchas ca ON td.IdCancha = ca.IdCancha
     INNER JOIN EstadosReserva er ON r.IdEstadoReserva = er.IdEstadoReserva
     WHERE r.FechaReserva BETWEEN @FechaDesde AND @FechaHasta
       AND (@IdEstadoReserva IS NULL OR r.IdEstadoReserva = @IdEstadoReserva)
