@@ -46,6 +46,10 @@
                         <span class="link-icon">TD</span>
                         Turnos disponibles
                     </a>
+                    <a class="sidebar-link" href="Promociones.aspx">
+                        <span class="link-icon">PR</span>
+                        Promociones
+                    </a>
                     <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
                         <span class="link-icon">RE</span>
                         Reservas

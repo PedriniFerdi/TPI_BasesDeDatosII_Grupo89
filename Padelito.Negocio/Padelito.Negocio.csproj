@@ -40,6 +40,7 @@
     <Compile Include="Servicios\CanchaNegocio.cs" />
     <Compile Include="Servicios\ClienteNegocio.cs" />
     <Compile Include="Servicios\EmpleadoNegocio.cs" />
+    <Compile Include="Servicios\PromocionNegocio.cs" />
     <Compile Include="Servicios\TiposCanchaNegocio.cs" />
     <Compile Include="Servicios\TurnosDisponiblesNegocio.cs" />
   </ItemGroup>

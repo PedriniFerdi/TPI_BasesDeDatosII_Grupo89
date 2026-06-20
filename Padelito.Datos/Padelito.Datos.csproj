@@ -39,6 +39,7 @@
     <Compile Include="Repositorios\CanchaDatos.cs" />
     <Compile Include="Repositorios\ClienteDatos.cs" />
     <Compile Include="Repositorios\EmpleadoDatos.cs" />
+    <Compile Include="Repositorios\PromocionDatos.cs" />
     <Compile Include="Repositorios\TiposCanchaDatos.cs" />
     <Compile Include="Repositorios\TurnosDisponiblesDatos.cs" />
   </ItemGroup>

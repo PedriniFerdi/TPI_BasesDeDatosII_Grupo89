@@ -47,6 +47,7 @@
     <Content Include="Content\dashboard.css" />
     <Content Include="Default.aspx" />
     <Content Include="Empleados.aspx" />
+    <Content Include="Promociones.aspx" />
     <Content Include="Site.Master" />
     <Content Include="TiposCancha.aspx" />
     <Content Include="TurnosDisponibles.aspx" />
@@ -80,6 +81,13 @@
     </Compile>
     <Compile Include="Empleados.aspx.designer.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Promociones.aspx.cs">
+      <DependentUpon>Promociones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Promociones.aspx.designer.cs">
+      <DependentUpon>Promociones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
