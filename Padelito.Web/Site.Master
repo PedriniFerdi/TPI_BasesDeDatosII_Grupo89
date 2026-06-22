@@ -50,6 +50,10 @@
                         <span class="link-icon">PR</span>
                         Promociones
                     </a>
+                    <a class="sidebar-link" href="Usuarios.aspx">
+                        <span class="link-icon">US</span>
+                        Usuarios
+                    </a>
                     <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
                         <span class="link-icon">RE</span>
                         Reservas

@@ -31,8 +31,10 @@
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empleado.cs" />
     <Compile Include="Entidades\Promocion.cs" />
+    <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\TiposCancha.cs" />
     <Compile Include="Entidades\TurnosDisponibles.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
