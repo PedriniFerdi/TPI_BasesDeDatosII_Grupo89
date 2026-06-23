@@ -54,10 +54,9 @@
                         <span class="link-icon">US</span>
                         Usuarios
                     </a>
-                    <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
+                    <a class="sidebar-link" href="Reservas.aspx">
                         <span class="link-icon">RE</span>
                         Reservas
-                        <span class="badge text-bg-secondary ms-auto">Pendiente</span>
                     </a>
                     <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
                         <span class="link-icon">PG</span>
