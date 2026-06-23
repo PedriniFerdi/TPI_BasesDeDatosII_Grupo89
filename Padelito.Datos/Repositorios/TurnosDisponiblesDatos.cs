@@ -57,6 +57,31 @@ namespace Padelito.Datos.Repositorios
             }
         }
 
+        public decimal ObtenerPrecioCancha(int idTurnoDisponible)
+        {
+            using (SqlConnection conexion = _conexionBD.CrearConexion())
+            using (SqlCommand comando = new SqlCommand(
+                @"SELECT c.PrecioHora
+                  FROM TurnosDisponibles td
+                  INNER JOIN Canchas c ON c.IdCancha = td.IdCancha
+                  WHERE td.IdTurnoDisponible = @IdTurnoDisponible
+                    AND td.Activo = 1
+                    AND c.Activa = 1", conexion))
+            {
+                comando.Parameters.Add("@IdTurnoDisponible", SqlDbType.Int).Value = idTurnoDisponible;
+                conexion.Open();
+
+                object precio = comando.ExecuteScalar();
+
+                if (precio == null || precio == DBNull.Value)
+                {
+                    throw new ArgumentException("El turno seleccionado no existe o no esta activo.");
+                }
+
+                return Convert.ToDecimal(precio);
+            }
+        }
+
         public void Agregar(TurnosDisponibles turnoDisponible)
         {
             using (SqlConnection conexion = _conexionBD.CrearConexion())

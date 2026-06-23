@@ -30,7 +30,10 @@
     <Compile Include="Entidades\Cancha.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empleado.cs" />
+    <Compile Include="Entidades\EstadoReserva.cs" />
     <Compile Include="Entidades\Promocion.cs" />
+    <Compile Include="Entidades\Reserva.cs" />
+    <Compile Include="Entidades\ReservaDetalle.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\TiposCancha.cs" />
     <Compile Include="Entidades\TurnosDisponibles.cs" />
