@@ -47,6 +47,7 @@
     <Content Include="Content\dashboard.css" />
     <Content Include="Default.aspx" />
     <Content Include="Empleados.aspx" />
+    <Content Include="Pagos.aspx" />
     <Content Include="Promociones.aspx" />
     <Content Include="Reservas.aspx" />
     <Content Include="Site.Master" />
@@ -83,6 +84,13 @@
     </Compile>
     <Compile Include="Empleados.aspx.designer.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos.aspx.cs">
+      <DependentUpon>Pagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pagos.aspx.designer.cs">
+      <DependentUpon>Pagos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Promociones.aspx.cs">
       <DependentUpon>Promociones.aspx</DependentUpon>
