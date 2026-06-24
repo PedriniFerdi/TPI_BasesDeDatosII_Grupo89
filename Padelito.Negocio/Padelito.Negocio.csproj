@@ -41,6 +41,8 @@
     <Compile Include="Servicios\ClienteNegocio.cs" />
     <Compile Include="Servicios\EmpleadoNegocio.cs" />
     <Compile Include="Servicios\EstadoReservaNegocio.cs" />
+    <Compile Include="Servicios\MetodoPagoNegocio.cs" />
+    <Compile Include="Servicios\PagoNegocio.cs" />
     <Compile Include="Servicios\PromocionNegocio.cs" />
     <Compile Include="Servicios\ReservaNegocio.cs" />
     <Compile Include="Servicios\RolNegocio.cs" />
