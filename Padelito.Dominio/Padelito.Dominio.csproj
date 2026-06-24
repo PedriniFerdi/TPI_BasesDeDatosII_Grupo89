@@ -31,6 +31,9 @@
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empleado.cs" />
     <Compile Include="Entidades\EstadoReserva.cs" />
+    <Compile Include="Entidades\MetodoPago.cs" />
+    <Compile Include="Entidades\Pago.cs" />
+    <Compile Include="Entidades\PagoDetalle.cs" />
     <Compile Include="Entidades\Promocion.cs" />
     <Compile Include="Entidades\Reserva.cs" />
     <Compile Include="Entidades\ReservaDetalle.cs" />
