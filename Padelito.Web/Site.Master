@@ -62,10 +62,9 @@
                         <span class="link-icon">PG</span>
                         Pagos
                     </a>
-                    <a class="sidebar-link sidebar-link-muted" href="#" title="Modulo pendiente">
+                    <a class="sidebar-link" href="Reportes.aspx">
                         <span class="link-icon">RP</span>
                         Reportes
-                        <span class="badge text-bg-secondary ms-auto">Pendiente</span>
                     </a>
                 </nav>
             </aside>

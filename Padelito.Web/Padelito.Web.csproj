@@ -49,6 +49,7 @@
     <Content Include="Empleados.aspx" />
     <Content Include="Pagos.aspx" />
     <Content Include="Promociones.aspx" />
+    <Content Include="Reportes.aspx" />
     <Content Include="Reservas.aspx" />
     <Content Include="Site.Master" />
     <Content Include="TiposCancha.aspx" />
@@ -98,6 +99,13 @@
     </Compile>
     <Compile Include="Promociones.aspx.designer.cs">
       <DependentUpon>Promociones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reservas.aspx.cs">
       <DependentUpon>Reservas.aspx</DependentUpon>
