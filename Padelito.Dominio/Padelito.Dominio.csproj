@@ -35,6 +35,7 @@
     <Compile Include="Entidades\Pago.cs" />
     <Compile Include="Entidades\PagoDetalle.cs" />
     <Compile Include="Entidades\Promocion.cs" />
+    <Compile Include="Entidades\ReporteReserva.cs" />
     <Compile Include="Entidades\Reserva.cs" />
     <Compile Include="Entidades\ReservaDetalle.cs" />
     <Compile Include="Entidades\Rol.cs" />

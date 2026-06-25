@@ -44,6 +44,7 @@
     <Compile Include="Servicios\MetodoPagoNegocio.cs" />
     <Compile Include="Servicios\PagoNegocio.cs" />
     <Compile Include="Servicios\PromocionNegocio.cs" />
+    <Compile Include="Servicios\ReporteNegocio.cs" />
     <Compile Include="Servicios\ReservaNegocio.cs" />
     <Compile Include="Servicios\RolNegocio.cs" />
     <Compile Include="Servicios\TiposCanchaNegocio.cs" />
