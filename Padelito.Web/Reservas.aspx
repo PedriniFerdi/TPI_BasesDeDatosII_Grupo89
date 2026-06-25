@@ -66,8 +66,8 @@
                             <asp:BoundField DataField="Empleado" HeaderText="Empleado" />
                             <asp:BoundField DataField="EstadoReserva" HeaderText="Estado" />
                             <asp:BoundField DataField="Promocion" HeaderText="Promocion" />
-                            <asp:BoundField DataField="PrecioBase" HeaderText="Base" DataFormatString="{0:C2}" />
-                            <asp:BoundField DataField="PrecioFinal" HeaderText="Final" DataFormatString="{0:C2}" />
+                            <asp:BoundField DataField="PrecioBase" HeaderText="Base" DataFormatString="${0:N2}" />
+                            <asp:BoundField DataField="PrecioFinal" HeaderText="Final" DataFormatString="${0:N2}" />
                             <asp:BoundField DataField="FechaCreacion" HeaderText="Creada" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
                             <asp:TemplateField HeaderText="Cambiar estado">
                                 <ItemTemplate>

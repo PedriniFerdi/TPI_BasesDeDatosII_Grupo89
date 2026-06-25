@@ -51,7 +51,7 @@
                         <asp:BoundField DataField="IdCancha" HeaderText="ID" />
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                         <asp:BoundField DataField="TipoCanchaDescripcion" HeaderText="Tipo" />
-                        <asp:BoundField DataField="PrecioHora" HeaderText="Precio hora" DataFormatString="{0:N2}" />
+                        <asp:BoundField DataField="PrecioHora" HeaderText="Precio hora" DataFormatString="${0:N2}" />
                         <asp:CheckBoxField DataField="Activa" HeaderText="Activa" />
                         <asp:TemplateField HeaderText="Acciones">
                             <ItemTemplate>

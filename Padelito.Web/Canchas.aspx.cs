@@ -95,7 +95,7 @@ namespace Padelito.Web
             hfIdCancha.Value = cancha.IdCancha.ToString();
             txtNombre.Text = cancha.Nombre;
             ddlTipoCancha.SelectedValue = cancha.IdTipoCancha.ToString();
-            txtPrecioHora.Text = cancha.PrecioHora.ToString("0.00");
+            txtPrecioHora.Text = cancha.PrecioHora.ToString("N2", CultureInfo.CurrentCulture);
             chkActiva.Checked = cancha.Activa;
         }
 

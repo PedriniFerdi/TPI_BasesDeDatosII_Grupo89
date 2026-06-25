@@ -58,7 +58,7 @@ namespace Padelito.Web
             foreach (ReservaDetalle reserva in _reservaNegocio.ListarDetalle())
             {
                 string texto = string.Format(
-                    "#{0} - {1} - {2} - {3:dd/MM/yyyy} - {4:C2}",
+                    "#{0} - {1} - {2} - {3:dd/MM/yyyy} - ${4:N2}",
                     reserva.IdReserva,
                     reserva.Cliente,
                     reserva.Cancha,

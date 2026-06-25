@@ -52,7 +52,7 @@
                             <asp:BoundField DataField="Cancha" HeaderText="Cancha" />
                             <asp:BoundField DataField="FechaReserva" HeaderText="Fecha reserva" DataFormatString="{0:dd/MM/yyyy}" />
                             <asp:BoundField DataField="MetodoPago" HeaderText="Metodo" />
-                            <asp:BoundField DataField="Monto" HeaderText="Monto" DataFormatString="{0:C2}" />
+                            <asp:BoundField DataField="Monto" HeaderText="Monto" DataFormatString="${0:N2}" />
                             <asp:BoundField DataField="FechaPago" HeaderText="Fecha pago" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
                             <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
                         </Columns>
