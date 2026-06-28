@@ -19,6 +19,12 @@ body {
     color: var(--padelito-text);
 }
 
+.login-page {
+    background:
+        linear-gradient(135deg, rgba(25, 135, 84, .14), rgba(255, 255, 255, .72)),
+        var(--padelito-bg);
+}
+
 a {
     text-decoration: none;
 }
@@ -212,6 +218,50 @@ a {
 
 .dashboard-main {
     padding: 1.5rem;
+}
+
+.login-shell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.25rem;
+}
+
+.login-card {
+    width: min(100%, 430px);
+    padding: 1.5rem;
+    border: 1px solid var(--padelito-border);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 18px 45px rgba(23, 33, 29, .12);
+}
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-brand strong,
+.login-brand small,
+.login-help span {
+    display: block;
+}
+
+.login-brand small,
+.login-help {
+    color: var(--padelito-muted);
+}
+
+.login-help {
+    display: grid;
+    gap: .15rem;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--padelito-border);
+    font-size: .86rem;
 }
 
 .panel-card,

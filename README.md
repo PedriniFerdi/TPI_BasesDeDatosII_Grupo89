@@ -2,6 +2,13 @@
 
 Proyecto ASP.NET Web Forms con .NET Framework 4.8, SQL Server, ADO.NET y Bootstrap.
 
+## Estado actual
+
+El sistema cuenta con pantallas funcionales para Clientes, Empleados, Tipos de cancha, Canchas, Turnos disponibles, Promociones, Usuarios, Reservas, Pagos, Reportes y Auditoria de reservas.
+
+El panel general muestra clientes activos, canchas activas, reservas del dia, ingresos registrados y ultimas reservas.
+
+
 ## Base de datos 
 
 La base se llama `PADELITO_DB`.
@@ -22,14 +29,24 @@ Objetos SQL existentes:
 
 - Vistas: `VW_ReservasDetalle`, `VW_PagosDetalle`, `VW_CanchasActivas`.
 - Stored procedures: `SP_ReporteReservasPorFecha`, `SP_CambiarEstadoReserva`.
-- Triggers: auditoria de `INSERT`, `UPDATE` y `DELETE` sobre `Reservas`.
+- Triggers: auditoria de `INSERT` y `UPDATE` sobre `Reservas`.
+
+Orden recomendado de ejecucion de scripts:
+
+1. `Padelito_DB.sql`
+2. `Padelito_DatosIniciales.sql`
+3. `Padelito_Vistas.sql`
+4. `Padelito_StoredProcedures.sql`
+5. `Padelito_Triggers.sql`
+
+Los scripts dejan cargados datos iniciales suficientes para recorrer la demo sin cargar todos los catalogos desde cero
 
 ## Proyectos de la solucion
 
 La solucion `Padelito.sln` tiene cuatro proyectos:
 
 - `Padelito.Web`: capa de presentacion con paginas `.aspx`.
-- `Padelito.Negocio`: reglas simples, validaciones y coordinacion de operaciones.
+- `Padelito.Negocio`: reglas de negocio, validaciones y coordinacion de operaciones.
 - `Padelito.Dominio`: clases que representan entidades de la base de datos.
 - `Padelito.Datos`: acceso a SQL Server usando ADO.NET.
 
@@ -52,11 +69,7 @@ Contiene las principales reglas del sistema
 
 ### Dominio
 
-Contiene clases y sus propiedades. En esta base inicial existe:
-
-- `Cliente`
-
-La clase coincide con la tabla `Clientes`.
+Contiene clases y sus propiedades para las entidades principales, modelos de detalle y resumenes usados por la interfaz.
 
 ### Datos
 
@@ -81,14 +94,33 @@ Esta en `Padelito.Web/Web.config`:
 
 Si la instancia local cambia, ajustar solamente `Server`.
 
+## Como ejecutar el proyecto
 
-## Flujo del CRUD Clientes
+Requisitos:
 
-1. `Clientes.aspx` muestra formulario y grilla.
-2. `Clientes.aspx.cs` captura eventos ABM
-3. `ClienteNegocio` valida datos y decide la operacion.
-4. `ClienteDatos` ejecuta SQL parametrizado contra `Clientes`.
-5. La grilla se recarga desde la base.
+- Visual Studio o entorno compatible con ASP.NET Web Forms y .NET Framework 4.8.
+- SQL Server local.
+- IIS Express.
+
+Pasos:
+
+1. Abrir SQL Server Management Studio o una herramienta equivalente.
+2. Ejecutar los scripts SQL en el orden indicado en la seccion Base de datos.
+3. Abrir `Padelito.sln`.
+4. Verificar en `Padelito.Web/Web.config` que la cadena de conexion apunte a la instancia local correcta.
+5. Compilar la solucion.
+6. Ejecutar `Padelito.Web` con IIS Express.
+7. Ingresar desde `Login.aspx` con un usuario de prueba.
+8. Recorrer los modulos desde el menu lateral.
 
 
+
+## Decisiones academicas
+
+- Se usa ADO.NET clasico para el acceso a datos.
+- La solucion mantiene capas simples: Web, Negocio, Datos y Dominio.
+- No se usa Entity Framework
+- Las contraseñas de usuarios son datos de prueba academica y no representan un esquema productivo de seguridad.
+- No se implementa autenticacion productiva porque el objetivo del trabajo es demostrar modelo de datos, capas, ABM, reservas, pagos, reportes y auditoria.
+- El login implementado es academico: valida usuarios activos y roles, pero no incluye hashing, ni recuperación de contraseña
 

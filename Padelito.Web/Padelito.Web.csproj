@@ -42,11 +42,13 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AuditoriaReservas.aspx" />
     <Content Include="Canchas.aspx" />
     <Content Include="Clientes.aspx" />
     <Content Include="Content\dashboard.css" />
     <Content Include="Default.aspx" />
     <Content Include="Empleados.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Pagos.aspx" />
     <Content Include="Promociones.aspx" />
     <Content Include="Reportes.aspx" />
@@ -58,6 +60,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditoriaReservas.aspx.cs">
+      <DependentUpon>AuditoriaReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AuditoriaReservas.aspx.designer.cs">
+      <DependentUpon>AuditoriaReservas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Canchas.aspx.cs">
       <DependentUpon>Canchas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -85,6 +94,13 @@
     </Compile>
     <Compile Include="Empleados.aspx.designer.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pagos.aspx.cs">
       <DependentUpon>Pagos.aspx</DependentUpon>
@@ -114,6 +130,7 @@
     <Compile Include="Reservas.aspx.designer.cs">
       <DependentUpon>Reservas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SeguridadSesion.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

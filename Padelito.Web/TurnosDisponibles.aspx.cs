@@ -11,6 +11,8 @@ namespace Padelito.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SeguridadSesion.RequiereRol(Page, SeguridadSesion.RolAdministrador);
+
             if (!IsPostBack)
             {
                 CargarCanchas();

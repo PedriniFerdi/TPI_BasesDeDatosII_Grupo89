@@ -30,27 +30,27 @@
                         <span class="link-icon">CL</span>
                         Clientes
                     </a>
-                    <a class="sidebar-link" href="Empleados.aspx">
+                    <a id="lnkEmpleados" runat="server" class="sidebar-link" href="Empleados.aspx">
                         <span class="link-icon">EM</span>
                         Empleados
                     </a>
-                    <a class="sidebar-link" href="TiposCancha.aspx">
+                    <a id="lnkTiposCancha" runat="server" class="sidebar-link" href="TiposCancha.aspx">
                         <span class="link-icon">TC</span>
                         Tipos de cancha
                     </a>
-                    <a class="sidebar-link" href="Canchas.aspx">
+                    <a id="lnkCanchas" runat="server" class="sidebar-link" href="Canchas.aspx">
                         <span class="link-icon">CA</span>
                         Canchas
                     </a>
-                    <a class="sidebar-link" href="TurnosDisponibles.aspx">
+                    <a id="lnkTurnosDisponibles" runat="server" class="sidebar-link" href="TurnosDisponibles.aspx">
                         <span class="link-icon">TD</span>
                         Turnos disponibles
                     </a>
-                    <a class="sidebar-link" href="Promociones.aspx">
+                    <a id="lnkPromociones" runat="server" class="sidebar-link" href="Promociones.aspx">
                         <span class="link-icon">PR</span>
                         Promociones
                     </a>
-                    <a class="sidebar-link" href="Usuarios.aspx">
+                    <a id="lnkUsuarios" runat="server" class="sidebar-link" href="Usuarios.aspx">
                         <span class="link-icon">US</span>
                         Usuarios
                     </a>
@@ -66,6 +66,10 @@
                         <span class="link-icon">RP</span>
                         Reportes
                     </a>
+                    <a id="lnkAuditoria" runat="server" class="sidebar-link" href="AuditoriaReservas.aspx">
+                        <span class="link-icon">AU</span>
+                        Auditoria
+                    </a>
                 </nav>
             </aside>
 
@@ -77,18 +81,14 @@
                     </div>
 
                     <div class="topbar-actions">
-                        <div class="search-box">
-                            <span class="search-icon">Buscar</span>
-                            <input class="form-control" type="search" placeholder="Cliente, cancha o reserva" aria-label="Buscar" />
-                        </div>
-
                         <div class="user-chip">
-                            <span class="user-avatar">AD</span>
+                            <asp:Label ID="lblInicialesUsuario" runat="server" CssClass="user-avatar" />
                             <span>
-                                <strong>Admin</strong>
-                                <small>Turno gestion</small>
+                                <strong><asp:Literal ID="litNombreUsuario" runat="server" /></strong>
+                                <small><asp:Literal ID="litRolUsuario" runat="server" /></small>
                             </span>
                         </div>
+                        <asp:LinkButton ID="btnCerrarSesion" runat="server" CssClass="btn btn-sm btn-outline-secondary" OnClick="btnCerrarSesion_Click">Cerrar sesion</asp:LinkButton>
                     </div>
                 </header>
 

@@ -36,8 +36,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion\ConexionBD.cs" />
+    <Compile Include="Repositorios\AuditoriaReservaDatos.cs" />
     <Compile Include="Repositorios\CanchaDatos.cs" />
     <Compile Include="Repositorios\ClienteDatos.cs" />
+    <Compile Include="Repositorios\DashboardDatos.cs" />
     <Compile Include="Repositorios\EmpleadoDatos.cs" />
     <Compile Include="Repositorios\EstadoReservaDatos.cs" />
     <Compile Include="Repositorios\MetodoPagoDatos.cs" />

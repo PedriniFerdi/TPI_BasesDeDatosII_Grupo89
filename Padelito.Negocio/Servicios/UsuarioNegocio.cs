@@ -24,6 +24,28 @@ namespace Padelito.Negocio.Servicios
             return _usuarioDatos.ObtenerPorId(idUsuario);
         }
 
+        public Usuario Login(string nombreUsuario, string contrasenia)
+        {
+            if (string.IsNullOrWhiteSpace(nombreUsuario))
+            {
+                throw new ArgumentException("Debe ingresar el nombre de usuario.");
+            }
+
+            if (string.IsNullOrWhiteSpace(contrasenia))
+            {
+                throw new ArgumentException("Debe ingresar la contrasenia.");
+            }
+
+            Usuario usuario = _usuarioDatos.Autenticar(nombreUsuario.Trim(), contrasenia.Trim());
+
+            if (usuario == null)
+            {
+                throw new ArgumentException("Usuario o contrasenia incorrectos.");
+            }
+
+            return usuario;
+        }
+
         public List<Empleado> ListarEmpleadosDisponibles(int idEmpleadoActual)
         {
             return _usuarioDatos.ListarEmpleadosDisponibles(idEmpleadoActual);

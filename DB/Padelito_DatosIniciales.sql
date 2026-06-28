@@ -3,8 +3,7 @@
    Ejecutar despues de Padelito_DB.sql, Padelito_Triggers.sql,
    Padelito_Vistas.sql y Padelito_StoredProcedures.sql.
 
-   Script idempotente: evita duplicar registros si se ejecuta
-   mas de una vez.
+   Este script evita duplicar datos si se ejecuta más de una vez.
    ============================================================ */
 
 USE PADELITO_DB
@@ -143,8 +142,6 @@ BEGIN TRY
 
     /* ========================================================
        USUARIOS DEL SISTEMA
-       Nota: las contrasenias son de prueba y deberian reemplazarse
-       por hashes reales si se implementa login.
        ======================================================== */
 
     DECLARE @IdRolAdministrador INT = (SELECT IdRol FROM Roles WHERE Descripcion = 'Administrador');

@@ -65,6 +65,33 @@ namespace Padelito.Datos.Repositorios
             }
         }
 
+        public Usuario Autenticar(string nombreUsuario, string contrasenia)
+        {
+            using (SqlConnection conexion = _conexionBD.CrearConexion())
+            using (SqlCommand comando = new SqlCommand(
+                @"SELECT u.IdUsuario, u.NombreUsuario, u.Contrasenia, u.IdEmpleado,
+                         p.Apellido + ', ' + p.Nombre AS EmpleadoNombreCompleto,
+                         u.IdRol, r.Descripcion AS RolDescripcion,
+                         u.Activo, u.FechaAlta
+                  FROM Usuarios u
+                  INNER JOIN Empleados e ON e.IdEmpleado = u.IdEmpleado
+                  INNER JOIN Personas p ON p.IdPersona = e.IdPersona
+                  INNER JOIN Roles r ON r.IdRol = u.IdRol
+                  WHERE u.NombreUsuario = @NombreUsuario
+                    AND u.Contrasenia = @Contrasenia
+                    AND u.Activo = 1", conexion))
+            {
+                comando.Parameters.Add("@NombreUsuario", SqlDbType.VarChar, 50).Value = nombreUsuario;
+                comando.Parameters.Add("@Contrasenia", SqlDbType.VarChar, 255).Value = contrasenia;
+                conexion.Open();
+
+                using (SqlDataReader lector = comando.ExecuteReader())
+                {
+                    return lector.Read() ? MapearUsuario(lector) : null;
+                }
+            }
+        }
+
         public List<Empleado> ListarEmpleadosDisponibles(int idEmpleadoActual)
         {
             var empleados = new List<Empleado>();

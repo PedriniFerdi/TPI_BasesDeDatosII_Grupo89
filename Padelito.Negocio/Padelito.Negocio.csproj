@@ -37,8 +37,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Servicios\AuditoriaReservaNegocio.cs" />
     <Compile Include="Servicios\CanchaNegocio.cs" />
     <Compile Include="Servicios\ClienteNegocio.cs" />
+    <Compile Include="Servicios\DashboardNegocio.cs" />
     <Compile Include="Servicios\EmpleadoNegocio.cs" />
     <Compile Include="Servicios\EstadoReservaNegocio.cs" />
     <Compile Include="Servicios\MetodoPagoNegocio.cs" />
